@@ -52,7 +52,7 @@ def run():
     fleetIDs = vehicle_init((numVehicles + numAgents), routeID)
     vehicleIDs = [fleetIDs[i] for i in range(numVehicles)]
     agentIDs = [fleetIDs[i] for i in range(numVehicles, len(fleetIDs))]
-    
+
     # initialising listener 
     listener = Listener_00(vehicleIDs, routeID)
     traci.addStepListener(listener)
@@ -80,7 +80,9 @@ def run():
         if step % 1000 == 0:
             posns = listener.getPosns()
             speeds = listener.getSpeeds()
+
             print(f"==STEP==: {step}")
+            
             print("--posns--")
             for posn in posns: 
                 if posn:
