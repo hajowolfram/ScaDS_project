@@ -65,20 +65,12 @@ class demoEnv(gym.Env):
         traci.vehicle.setAcceleration(self._agentID, action[0])
         vehicle_info = [None] * len(self._vehicleIDs)
 
+        posns = Listener_00.getPosns()
+        speeds = Listener_00.getSpeeds()
+
         for id in self._vehicleIDs:
-            vehicle_index = int(id)
-
-            try:
-                pos = traci.vehicle.getPosition(id)
-            except traci.TraCIException:
-                pos = None
-
-            try:
-                speed = traci.vehicle.getSpeed(id)
-            except traci.TraCIException:
-                speed = None
-
-            vehicle_info[vehicle_index] = (pos[0], pos[1], speed)
+            id_index = int(id)
+            vehicle_info[id_index] = (posns[id_index][0], posns[id_index][1], speeds[id_index])
 
         padded_obs = np.pad(vehicle_info, (0, len(self._vehicleIDs) * 3))
         observation = np.array(padded_obs)
