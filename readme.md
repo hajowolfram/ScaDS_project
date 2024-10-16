@@ -8,6 +8,7 @@ First, install all the required Python packages specified in `requirements.txt`.
 
 ```bash
 pip install -r requirements.txt
+```
 
 ### 2. Set Root Directory Path in .env
 
@@ -15,3 +16,4 @@ Ensure you have a .env file in the root of your project. You can use this file t
 
 ```bash
 SUMO_CONFIG_PATH=config/demo_00.sumocfg
+```
