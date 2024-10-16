@@ -15,5 +15,5 @@ pip install -r requirements.txt
 Ensure you have a .env file in the root of your project. You can use this file to set the necessary environment variables.
 
 ```bash
-SUMO_CONFIG_PATH=config/demo_00.sumocfg
+SUMO_PROJECT_PATH=your_path_to_root_directory
 ```
