@@ -26,7 +26,7 @@ def get_options():
         default=False,
         help="run the commandline version of sumo"
     )
-    options, args = opt_parser.parse_args()
+    options, _ = opt_parser.parse_args()
     return options
 
 def vehicle_init(N: int, routeID: str = "") -> List[str]:
