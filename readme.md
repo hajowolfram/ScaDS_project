@@ -20,8 +20,6 @@ SUMO_PROJECT_PATH=your_path_to_root_directory
 
 ### Citations:
 
-# Citation
-
 This project utilizes components from the RL Dresden Algorithm Suite. If you use this code in your own projects or papers, please cite it as follows:
 
 ```bash
