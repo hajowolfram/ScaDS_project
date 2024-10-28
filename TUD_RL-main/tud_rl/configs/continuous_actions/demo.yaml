@@ -1,6 +1,6 @@
 ---
 env:
-  name: InvertedDoublePendulumPyBulletEnv-v0
+  name: demo_env
   max_episode_steps: 1000
   state_type: feature
   env_kwargs: {}
@@ -39,7 +39,7 @@ agent:
     top_qs_to_drop: 10
     n_qs: 25
     n_critics: 5
-seed: 12
+seed: 42
 timesteps: 15000000
 epoch_length: 5000
 eval_episodes: 10
@@ -70,5 +70,5 @@ act_start_step: 5000
 upd_start_step: 5000
 upd_every: 1
 batch_size: 32
-device: cpu
+device: cuda
 

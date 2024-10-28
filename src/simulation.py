@@ -35,16 +35,16 @@ class simulation:
             help="run the commandline version of sumo"
         )
         self._options, _ = opt_parser.parse_args()
+
+    def vehicle_init(self) -> List[str]:
+        vehicleIDs = [None] * self._num_vehicles
         
-
-    def vehicle_init(self, num_vehicles: int, routeID: str = "") -> List[str]:
-        vehicleIDs = [None] * num_vehicles
-        for i in range(num_vehicles):
+        for i in range(self._num_vehicles):
             vehicleIDs[i] = str(i)
-
+        
         for id in vehicleIDs:
-            traci.vehicle.add(id, routeID)
-
+            traci.vehicle.add(id, self._route_id)
+        
         return vehicleIDs
 
     def simulation_init(self):
@@ -61,25 +61,17 @@ class simulation:
         traci.addStepListener(self._listener)
 
         # initalising DDPG agent
-
-        '''
-        TODO agent_setup(alpha, beta, input_dims, tau, n_actions)
-        ALTERNATIVELY: subclass gym.env with traci API 
-        attributes:
-        - action_space
-        - observation_space
-        - action_to_direction
-        - 
-        '''
+        
     def simulation_step(self) -> None:
         self._step += 1
         traci.simulation.step()
     
-    def simulation_run(self) -> None:
+    def simulation_run(self, fast_forward: bool) -> None:
         # loop to state in which all vehicles are initalised/moving
-        while traci.simulation.getMinExpectedNumber() < self._num_vehicles:
-            traci.simulation.step()
-            step += 1
+        if fast_forward:
+            while traci.simulation.getMinExpectedNumber() < self._num_vehicles:
+                traci.simulation.step()
+                step += 1
 
         # interface with agent while vehicles are active
         while traci.simulation.getMinExpectedNumber() > 0:
@@ -131,7 +123,7 @@ class simulation:
         traci.close(False)
         sys.stdout.flush()
 
-    def start_sumo(self):
+    def start_sumo(self) -> None:
 
         root_path = os.getenv("SUMO_PROJECT_PATH")
         config_file_path = os.path.join(root_path, "config/demo_00.sumocfg")
@@ -162,7 +154,7 @@ class simulation:
     def get_ids(self) -> tuple[List[int], List[int]]:
         return self._vehicle_ids, self._agent_ids
     
-    def terminated(self) -> bool:
+    def is_terminated(self) -> bool:
         return not traci.simulation.getMinExpectedNumber() > 0
     
     def get_obs(self) -> tuple[List[float], List[float]]:
@@ -174,5 +166,7 @@ class simulation:
         traci.close(False)
         sys.stdout.flush()
         
-    
-      
+    def set_acceleration(self, action: List[float]) -> None:
+        for id in self._agent_ids:
+            traci.vehicle.setAcceleration(id, action[int(id)])
+             
