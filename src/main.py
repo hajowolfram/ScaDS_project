@@ -1,20 +1,14 @@
-from demo_00 import setup_sumo, get_options, start_sumo, run_simulation
-from gym.envs.registration import register
-
-register(
-    id="gym_examples/demo_env",
-    entry_point="gym_examples.envs:demoEnv",
-    max_episode=300,
-)
+import gym, gym_examples
+from gym.utils.env_checker import check_env
 
 def main():
-    setup_sumo()    
-    options = get_options()
-    start_sumo(options)
-    run_simulation()
-    '''
-    add the initialisation of the env package
-    '''
+    env = gym.make(
+        "gym_examples/SumoEnv-v0", 
+        num_vehicles=5,
+        num_agents=1,
+        route_id="0"
+    )
+    check_env(env)
 
 if __name__ == "__main__":
     main()
