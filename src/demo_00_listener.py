@@ -8,7 +8,7 @@ class Listener_00(traci.StepListener):
         self._vehicleIDs = vehicleIDs
         self._routeID = routeID
         self._speeds = [None] * len(vehicleIDs)
-        self._posns = [None for _ in range(len(vehicleIDs))]
+        self._posns = [None] * len(vehicleIDs)
     
     def getPosns(self) -> List[tuple]:
         return self._posns
