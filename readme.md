@@ -18,6 +18,14 @@ Ensure you have a .env file in the root of your project. You can use this file t
 SUMO_PROJECT_PATH=your_path_to_root_directory
 ```
 
+### 3. Install gymnasium package locally in project root directory
+
+```bash
+pip install -e .
+```
+
+### 4. Install SUMO (traffic simulation software) [here](https://sumo.dlr.de/docs/Installing/index.html)
+
 ### Citations:
 
 This project utilizes components from the RL Dresden Algorithm Suite. If you use this code in your own projects or papers, please cite it as follows:
