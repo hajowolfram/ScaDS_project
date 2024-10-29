@@ -11,11 +11,10 @@ from src.simulation import Simulation
 load_dotenv()
 root_path = os.getenv("SUMO_PROJECT_PATH")
 sys.path.append(root_path)
-print(sys.path)
 
 class DemoEnv(gym.Env):
     metadata = {"render.modes": ["console"]}
-
+    # WARN: The environment creator metadata doesn't include `render_modes`, contains: ['render.modes']
     def __init__(self, num_vehicles, num_agents, route_id):
         super().__init__()
     
@@ -62,25 +61,27 @@ class DemoEnv(gym.Env):
         ''' todo'''
         pass
     
-    def reset(self, seed=None, options=None) -> tuple[List[float], List[float]]:
+    def reset(self, seed=None, options=None) -> tuple[List[float], dict]:
         super().reset(seed=seed)
-        '''
-        todo:
-        needs fixing to avoid re-initialising existing vehicles
-        '''
-        return self._simulation.get_obs()
-    
-        # initialise new simulation
-        # traci.load(["-c", "demo_00.sumocfg"]) 
-        self._simulation = Simulation(
-            self._num_vehicles, 
-            self._num_agents, 
-            self._route_id
-        )
-        self._simulation.get_options()
-        # self._simulation.start_sumo()
-        self._simulation.simulation_init()
-        return self._simulation.get_obs()  # your initial observation
+        
+        if not hasattr(self, "_simulation") or self._simulation is None:
+            self._simulation = Simulation(self._num_vehicles, self._num_agents, self._route_id)
+            self._simulation.setup_sumo()
+            self._simulation.get_options()
+            self._simulation.start_sumo()
+            self._simulation.simulation_init()
+            self._vehicle_ids, self._agent_ids = self._simulation.get_ids()
+        else:
+            # self._simulation.simulation_reset()
+            pass
+        
+        obs = self._simulation.get_obs() 
+        
+        print("Observation:", obs)
+        print("Expected shape:", self.observation_space.shape)
+        print("Actual shape:", obs.shape)
+        
+        return obs, {}
         
     def step(self, action) -> tuple[object, float, bool, object]:
         self._simulation.simulation_step()

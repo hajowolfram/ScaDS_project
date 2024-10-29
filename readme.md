@@ -49,7 +49,7 @@ This project utilizes [SUMO](https://sumo.dlr.de/docs/index.html) (simulation of
 }
 ```
 
-This project utilizes components from the RL Dresden Algorithm Suite. If you use this code in your own projects or papers, please cite it as follows:
+This project utilizes components from the RL Dresden Algorithm Suite.
 
 ```bash
 @misc{TUDRL,
