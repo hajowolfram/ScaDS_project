@@ -32,6 +32,23 @@ Install `SUMO` (simulation of urban mobility) [here](https://sumo.dlr.de/docs/In
 
 ### Citations:
 
+This project utilizes [SUMO](https://sumo.dlr.de/docs/index.html) (simulation of urban mobility)
+
+```bash
+@inproceedings{dlr127994,
+  title = {Microscopic Traffic Simulation using SUMO},
+  month = {November},
+  author = {Alvarez Lopez, Pablo and Behrisch, Michael and Bieker-Walz, Laura and Erdmann, Jakob and Fl{\"o}tter{\"o}d, Yun-Pang and Hilbrich, Robert and L{\"u}cken, Leonhard and Rummel, Johannes and Wagner, Peter and Wie{\ss}ner, Evamarie},
+  pages = {2575--2582},
+  year = {2018},
+  booktitle = {2019 IEEE Intelligent Transportation Systems Conference (ITSC)},
+  publisher = {IEEE},
+  keywords = {traffic simulation, modelling, optimization},
+  url = {https://elib.dlr.de/127994/},
+  abstract = {Microscopic traffic simulation is an invaluable tool for traffic research. In recent years, both the scope of research and the capabilities of the tools have been extended considerably. This article presents the latest developments concerning intermodal traffic solutions, simulator coupling and model development and validation on the example of the open source traffic simulator SUMO.}
+}
+```
+
 This project utilizes components from the RL Dresden Algorithm Suite. If you use this code in your own projects or papers, please cite it as follows:
 
 ```bash
