@@ -48,7 +48,7 @@ python3 ./main.py
 ## Further Use:
 
 In order to add custom environments, please refer to the gymnasium documentation [here](https://www.gymlibrary.dev/content/environment_creation/).
-It is reccomended to utilise gymnasium to ensure compatability with gymnasium's provided RL modules.
+It is recomended to utilise gymnasium to ensure compatability with gymnasium's provided RL modules.
 Support for different agents coming soon!
 
 ## Citations:
