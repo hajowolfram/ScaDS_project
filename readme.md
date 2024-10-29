@@ -4,27 +4,31 @@ Follow these steps to set up and run the project:
 
 ### 1. Install Dependencies
 
-First, install all the required Python packages specified in `requirements.txt`. You can do this using `pip`:
+Install all required Python packages specified in `requirements.txt`. You can do this using `pip`:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 2. Set Root Directory Path in .env
+### 2. Set Environment Variables
 
-Ensure you have a .env file in the root of your project. You can use this file to set the necessary environment variables.
+Ensure you set the path of the root directory in a `.env` file:
 
 ```bash
 SUMO_PROJECT_PATH=your_path_to_root_directory
 ```
 
-### 3. Install gymnasium package locally in project root directory
+### 3. Install Package Locally
+
+Install gymnasium package locally in project root directory with `pip`:
 
 ```bash
 pip install -e .
 ```
 
-### 4. Install SUMO (traffic simulation software) [here](https://sumo.dlr.de/docs/Installing/index.html)
+### 4. Install SUMO 
+
+Install `SUMO` (simulation of urban mobility) [here](https://sumo.dlr.de/docs/Installing/index.html)
 
 ### Citations:
 
