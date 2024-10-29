@@ -1,11 +1,12 @@
-import gym
-from gym import spaces
+import gymnasium as gym
+from gymnasium import spaces
 import numpy as np
 import os
 import sys
 from typing import List
 from statistics import mean
 from dotenv import load_dotenv
+from src.simulation import Simulation
 
 load_dotenv()
 root_path = os.getenv("SUMO_PROJECT_PATH")
@@ -16,7 +17,6 @@ class DemoEnv(gym.Env):
     metadata = {"render.modes": ["console"]}
 
     def __init__(self, num_vehicles, num_agents, route_id):
-        from src.simulation import Simulation
         super().__init__()
     
         self._num_vehicles = num_vehicles
@@ -26,7 +26,6 @@ class DemoEnv(gym.Env):
         self._simulation.setup_sumo()
         self._simulation.get_options()
         self._simulation.start_sumo()
-        self._simulation.vehicle_init()
         self._simulation.simulation_init()
         self._vehicle_ids, self._agent_ids = self._simulation.get_ids()
         
@@ -45,7 +44,7 @@ class DemoEnv(gym.Env):
             }),
         })
         # (x, y, speed) for each vehicle
-        high = np.array([np.inf] * self._numVehicles * 3) 
+        high = np.array([np.inf] * self._num_vehicles * 3) 
         
         self.observation_space = spaces.Box(
             low=-high, 
@@ -64,9 +63,13 @@ class DemoEnv(gym.Env):
         pass
     
     def reset(self, seed=None, options=None) -> tuple[List[float], List[float]]:
-        from src.simulation import Simulation
-        
         super().reset(seed=seed)
+        '''
+        todo:
+        needs fixing to avoid re-initialising existing vehicles
+        '''
+        return self._simulation.get_obs()
+    
         # initialise new simulation
         # traci.load(["-c", "demo_00.sumocfg"]) 
         self._simulation = Simulation(
@@ -75,8 +78,7 @@ class DemoEnv(gym.Env):
             self._route_id
         )
         self._simulation.get_options()
-        self._simulation.start_sumo()
-        self._simulation.vehicle_init()
+        # self._simulation.start_sumo()
         self._simulation.simulation_init()
         return self._simulation.get_obs()  # your initial observation
         

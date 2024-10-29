@@ -19,6 +19,9 @@ class Simulation:
         self._route_id = route_id
         self._step = 0
         self._options = None
+        self._fleet_ids = None
+        self._agent_ids = None
+        self._vehicle_ids = None
     
     def setup_sumo(self) -> None:
         if 'SUMO_HOME' in os.environ:
@@ -62,7 +65,7 @@ class Simulation:
         ]
         traci.start(sumoCmd)
 
-    def vehicle_init(self) -> List[str]:
+    def _vehicle_init(self) -> List[str]:
         vehicleIDs = [None] * self._num_vehicles
         
         for i in range(self._num_vehicles):
@@ -75,10 +78,7 @@ class Simulation:
 
     def simulation_init(self) -> None:
         # initialising vehicles
-        self._fleet_ids = self.vehicle_init(
-            (self._num_vehicles + self._num_agents), 
-            self._route_id
-        )
+        self._fleet_ids = self._vehicle_init()
         self._vehicle_ids = [self._fleet_ids[i] for i in range(self._num_vehicles)]
         self._agent_ids = [self._fleet_ids[i] for i in range(self._num_vehicles, len(self._fleet_ids))]
 
