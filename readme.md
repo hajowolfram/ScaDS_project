@@ -1,4 +1,9 @@
-## Getting Started
+## Overview
+
+This project provides a framework to train different types of autonomous vehicle RL agents 
+via SUMO simulations to improve traffic flow. 
+
+## Setup Guide
 
 Follow these steps to set up and run the project:
 
@@ -30,7 +35,13 @@ pip install -e .
 
 Install `SUMO` (simulation of urban mobility) [here](https://sumo.dlr.de/docs/Installing/index.html)
 
-### Citations:
+### 5. run with main.py (NOTE FUNCTIONALITY STILL W.I.P) 
+
+```bash
+python3 ./main.py
+```
+
+## Citations:
 
 This project utilizes [SUMO](https://sumo.dlr.de/docs/index.html) (simulation of urban mobility)
 

@@ -116,62 +116,6 @@ class Simulation:
         return speeds, posns
         
     def set_acceleration(self, action: List[float]) -> None:
+        '''todo: add error handling'''
         for id in self._agent_ids:
             traci.vehicle.setAcceleration(id, action[int(id)])
-    
-    # def simulation_run(self, fast_forward: bool) -> None:
-    #     # loop to state in which all vehicles are initalised/moving
-    #     if fast_forward:
-    #         while traci.simulation.getMinExpectedNumber() < self._num_vehicles:
-    #             traci.simulation.step()
-    #             step += 1
-
-    #     # interface with agent while vehicles are active
-    #     while traci.simulation.getMinExpectedNumber() > 0:
-                
-    #         if step % 1000 == 0:
-    #             posns = self._listener.getPosns()
-    #             speeds = self._listener.getSpeeds()
-
-    #             print(f"==STEP==: {step}")
-                
-    #             print("--posns--")
-    #             for posn in posns: 
-    #                 if posn:
-    #                     print(f"({posn[0]:.4f}, {posn[1]:.4f}), ")
-    #                 else:
-    #                     print("None, ")
-
-    #             print("--speeds--")
-    #             for speed in speeds:
-    #                 if speed:
-    #                     print(f"{float(speed):.2f}, ")
-    #                 else:
-    #                     print("none, ")
-                    
-    #         # interfacing with RL agent
-
-    #         # agent is given current state info
-    #         # agent chooses action
-    #         # action is performed (longitudinal accel/deccel of AV chosen)
-    #         '''
-    #         TODO:
-    #         agent_00.choose_action()
-    #         '''
-
-    #         traci.simulationStep()
-
-    #         '''
-    #         TODO:
-    #         observe new state and reward
-    #         agent_00.learn()
-            
-    #         every M iterations or so:
-    #             agent_00.update_network_parameters()
-
-    #         '''
-    #         step += 1
-        
-    #     # ending simulation
-    #     traci.close(False)
-    #     sys.stdout.flush()
