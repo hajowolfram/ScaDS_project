@@ -1,7 +1,11 @@
 ## Overview
 
 This project provides a framework to train different types of autonomous vehicle RL agents 
-via SUMO simulations to improve traffic flow. 
+via SUMO simulations to improve traffic flow. The provided SUMO network and configuration files allow for basic training of vehicle controller agents in a simulation environment with IDM vehicles. SUMO also supports OSM, and this project will likely be extended to support traffic controller agents in addition to autonomous vehicle controllers in the future.
+
+## Important
+
+While some basic simulation functionality has been implemented, this project is still a work in progress.
 
 ## Setup Guide
 
